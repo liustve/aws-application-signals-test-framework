@@ -1,6 +1,7 @@
 #!/bin/bash
 
 IS_BASE_RUN=${1:-false}
+FUNCTION_NAME=${2:-aws-opentelemetry-distro-python}
 SLEEP_TIME_SECONDS=60
 TEST_RUNS=${NUM_TEST_RUNS:-20}
 
@@ -25,7 +26,7 @@ for i in $(seq 1 "$TEST_RUNS"); do
 
   # Update environment variables
   aws lambda update-function-configuration \
-    --function-name aws-opentelemetry-distro-python \
+    --function-name $FUNCTION_NAME \
     --environment "$ENV_JSON" > /dev/null
 
   # Wait a short time for changes to take effect
@@ -33,7 +34,7 @@ for i in $(seq 1 "$TEST_RUNS"); do
 
   # Invoke the Lambda function
   echo "Iteration $i: Invoking Lambda function"
-  aws lambda invoke --function-name aws-opentelemetry-distro-python --payload '{}' response.json > /dev/null
+  aws lambda invoke --function-name $FUNCTION_NAME --payload '{}' response.json > /dev/null
 
   # Wait to simulate cold start reset
   echo "Iteration $i: Waiting for cold start reset"
@@ -64,7 +65,7 @@ QUERY='fields @timestamp, @message, @initDuration
 
 # Start the query
 QUERY_ID=$(aws logs start-query \
-  --log-group-name "/aws/lambda/aws-opentelemetry-distro-python" \
+  --log-group-name "/aws/lambda/$FUNCTION_NAME" \
   --start-time "$CW_LOGS_QUERY_START_TIME" \
   --end-time "$CW_LOGS_QUERY_END_TIME" \
   --query-string "$QUERY" \

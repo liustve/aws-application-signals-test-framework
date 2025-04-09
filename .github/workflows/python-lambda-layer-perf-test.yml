@@ -55,7 +55,7 @@ jobs:
       run: |
         cd current-repo
         chmod +x lambda-layer-perf-test/lambda-layer-run.sh
-        ./lambda-layer-perf-test/lambda-layer-run.sh false
+        ./lambda-layer-perf-test/lambda-layer-run.sh false aws-opentelemetry-distro-python
 
     - name: Remove Application Signals Lambda Layer
       run: |
@@ -83,7 +83,7 @@ jobs:
       run: |
         cd current-repo
         chmod +x lambda-layer-perf-test/lambda-layer-run.sh
-        ./lambda-layer-perf-test/lambda-layer-run.sh true
+        ./lambda-layer-perf-test/lambda-layer-run.sh true aws-opentelemetry-distro-python
 
     - name: Upload no layer results
       uses: actions/upload-artifact@v4
