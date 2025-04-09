@@ -1,7 +1,7 @@
 #!/bin/bash
 
 IS_BASE_RUN=${1:-false}
-SLEEP_TIME_SECONDS=30
+SLEEP_TIME_SECONDS=60
 TEST_RUNS=${NUM_TEST_RUNS:-20}
 
 echo "Running $TEST_RUNS cold start test iterations"
@@ -97,9 +97,8 @@ FLATTENED=$(echo "$RESULT" | jq -r '
     join(",\n")
 ')
 
-
 if $IS_BASE_RUN; then
-    echo "$FLATTENED" > base_results.txt
+    echo "$FLATTENED" > no_layer_results.txt
     echo "Results saved to no_layer_results.txt"
 else
     echo "$FLATTENED" > layer_results.txt

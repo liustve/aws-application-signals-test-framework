@@ -88,8 +88,8 @@ jobs:
     - name: Upload no layer results
       uses: actions/upload-artifact@v4
       with:
-        name: base-results
-        path: base_results.txt
+        name: no-layer-results
+        path: no_layer_results.txt
         retention-days: 90
           
     - name: Upload layer results
