@@ -1,8 +1,11 @@
+## Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+## SPDX-License-Identifier: Apache-2.0
+
 #!/bin/bash
 
 IS_BASE_RUN=${1:-false}
-FUNCTION_NAME=${2:-aws-opentelemetry-distro-python}
-SLEEP_TIME_SECONDS=60
+FUNCTION_NAME=${2:-none}
+SLEEP_TIME_SECONDS=300
 TEST_RUNS=${NUM_TEST_RUNS:-20}
 
 echo "Running $TEST_RUNS cold start test iterations"

@@ -7,7 +7,7 @@ on:
       test_runs:
         description: 'Number of test runs to perform'
         required: true
-        default: 20
+        default: 23
         type: number
 jobs:
   python-lambda-layer-performance-test:
