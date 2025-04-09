@@ -80,7 +80,6 @@ while [ "$STATUS" = "Running" ]; do
   STATUS=$(echo "$RESULT" | jq -r .status)
 done
 
-# Display the query results
 if [ "$STATUS" = "Complete" ]; then
   echo "Query completed. Results:"
   echo "$RESULT"
@@ -88,3 +87,21 @@ else
   echo "Query failed with status: $STATUS"
 fi
 
+FLATTENED=$(echo "$RESULT" | jq -r '
+    .results[0] | 
+    map({(.field): .value}) | 
+    add | 
+    del(.Sample_Count) |
+    to_entries | 
+    map("\"\(.key)\": \"\(.value)\"") | 
+    join(",\n")
+')
+
+
+if $IS_BASE_RUN; then
+    echo "$FLATTENED" > base_results.txt
+    echo "Results saved to no_layer_results.txt"
+else
+    echo "$FLATTENED" > layer_results.txt
+    echo "Results saved to layer_results.txt"
+fi

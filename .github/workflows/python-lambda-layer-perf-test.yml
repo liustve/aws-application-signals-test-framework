@@ -23,7 +23,7 @@ jobs:
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        role-to-assume: arn:aws:iam::${{ secrets.APPLICATION_SIGNALS_E2E_TEST_ACCOUNT_ID }}:role/${{ secrets.APPLICATION_SIGNALS_E2E_TEST_ROLE_NAME }}
+        role-to-assume: arn:aws:iam::571600841604:role/github
         aws-region: us-east-1     
 
     - name: Checkout aws-otel-python-instrumentation
@@ -84,6 +84,20 @@ jobs:
         cd current-repo
         chmod +x lambda-layer-perf-test/lambda-layer-run.sh
         ./lambda-layer-perf-test/lambda-layer-run.sh true
+
+    - name: Upload no layer results
+      uses: actions/upload-artifact@v4
+      with:
+        name: base-results
+        path: base_results.txt
+        retention-days: 90
+          
+    - name: Upload layer results
+      uses: actions/upload-artifact@v4
+      with:
+        name: layer-results
+        path: layer_results.txt
+        retention-days: 90
 
     - name: Cleanup Terraform Resources
       if: success() || failure() || cancelled()
