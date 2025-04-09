@@ -85,6 +85,20 @@ jobs:
         chmod +x lambda-layer-perf-test/lambda-layer-run.sh
         ./lambda-layer-perf-test/lambda-layer-run.sh true
 
+    - name: Upload no layer results
+      uses: actions/upload-artifact@v4
+      with:
+        name: base-results
+        path: base_results.txt
+        retention-days: 90
+          
+    - name: Upload layer results
+      uses: actions/upload-artifact@v4
+      with:
+        name: layer-results
+        path: layer_results.txt
+        retention-days: 90
+
     - name: Cleanup Terraform Resources
       if: success() || failure() || cancelled()
       run: |
