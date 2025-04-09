@@ -1,7 +1,7 @@
 #!/bin/bash
 
 IS_BASE_RUN=${1:-false}
-SLEEP_TIME_SECONDS=10
+SLEEP_TIME_SECONDS=30
 TEST_RUNS=${NUM_TEST_RUNS:-20}
 
 echo "Running $TEST_RUNS cold start test iterations"
