@@ -98,9 +98,9 @@ FLATTENED=$(echo "$RESULT" | jq -r '
 ')
 
 if $IS_BASE_RUN; then
-    echo "$FLATTENED" > no_layer_results.txt
+    echo "$FLATTENED" > ../no_layer_results.txt
     echo "Results saved to no_layer_results.txt"
 else
-    echo "$FLATTENED" > layer_results.txt
+    echo "$FLATTENED" > ../layer_results.txt
     echo "Results saved to layer_results.txt"
 fi
