@@ -9,7 +9,6 @@ on:
         required: true
         default: 20
         type: number
-        
 jobs:
   python-lambda-layer-performance-test:
     runs-on: ubuntu-latest 
@@ -24,7 +23,7 @@ jobs:
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        role-to-assume: arn:aws:iam::${{ secrets.APPLICATION_SIGNALS_E2E_TEST_ACCOUNT_ID }}:role/${{ secrets.APPLICATION_SIGNALS_E2E_TEST_ROLE_NAME }}
+        role-to-assume: arn:aws:iam::571600841604:role/github
         aws-region: us-east-1     
 
     - name: Checkout aws-otel-python-instrumentation
